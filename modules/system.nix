@@ -167,12 +167,8 @@ in
     #  gnome.excludePackages = with pkgs; [ gnome-tour ];
     # };
 
-    programs.firefox.enable = true;
-    programs.hyprland.enable = true;
-
     environment.systemPackages = with pkgs; [
       vim
-      kitty
       git
     ];
   };
