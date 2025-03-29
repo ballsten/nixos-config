@@ -5,6 +5,10 @@
     lazygit
   ];
 
+  home.shellAliases = {
+    lg = "lazygit";
+  };
+
   programs.git = {
     enable = true;
     userEmail = "andrew@theaker.name";
