@@ -28,5 +28,9 @@ in
     hardware.graphics.enable32Bit = mkIf (pkgs.system == "x86_64-linux") true;
 
     programs.hyprland.enable = true;
+
+    environment.systemPackages = with pkgs; [
+        hyprpaper
+    ];
   };
 }

@@ -1,9 +1,27 @@
-{ pkgs, nix-config, ... }:
-
+{ pkgs, nix-config, ... }: let
+  wallpaper = pkgs.fetchurl {
+    url = "http://files.theaker.name/wallpaper/futuristic-spaceship-pilot.jpg";
+    hash = "sha256-fM8HGoicFjSpUOVM2RIOGP7QQ+BTQw0Yotp5ObxBM9Q=";
+  };
+in
 {
   # TODO: change to wezterm
   programs.kitty.enable = true;
   programs.firefox.enable = true;
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "on";
+      preload = [
+        (builtins.toString wallpaper)
+      ];
+
+      wallpaper = [
+        ",${builtins.toString wallpaper}"
+      ];
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -39,7 +57,7 @@
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
 
-      # exec-once = $terminal
+      exec-once = "hyprpaper"; 
       # exec-once = nm-applet &
       # exec-once = waybar & hyprpaper & firefox
 
