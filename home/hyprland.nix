@@ -6,8 +6,76 @@
 in
 {
   # TODO: change to wezterm
+  home.packages = with pkgs; [
+    hyprpicker
+  ];
+
   programs.kitty.enable = true;
   programs.firefox.enable = true;
+
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainbar = {
+        layer = "top";
+        position = "bottom";
+        modules-left = [ "hyprland/workspaces" ];
+        modules-right = ["battery" "clock"];
+        battery = {
+            format = "{capacity}% {icon}";
+            format-icons = ["" "" "" "" ""];
+        };
+        clock = {
+            format-alt = "{:%a, %d. %b  %H:%M}";
+        };
+      };
+    };
+    style = 
+    ''
+      * {
+        border: none;
+        border-radius: 0;
+        font-family: FiraCode Nerd Font;
+        font-size: 18px;
+        min-height: 0;
+      }
+      
+      window#waybar {
+        background: #000000;
+        color: #e5e9f0;
+      }
+
+      #workspaces button {
+        padding: 0 5px;
+        background: transparent;
+        color: #ffffff;
+        border-bottom: 3px solid transparent;
+      }
+
+      #workspaces button.focused {
+        background: #4c566a;
+        border-bottom: 3px solid #e5e9f0;
+      }
+
+      #workspaces button.urgent {
+        background-color: #bf616a;
+      }
+
+      #mode {
+        background: #64727D;
+        border-bottom: 3px solid #ffffff;
+      }
+
+      #clock #battery #mode {
+        padding: 0 10px;
+        margin: 0 10px;
+      }
+
+      #battery {
+        margin-right: 30px;
+      }
+    '';
+  };
 
   services.hyprpaper = {
     enable = true;
@@ -57,7 +125,10 @@ in
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
 
-      exec-once = "hyprpaper"; 
+      exec-once = [ 
+        "hyprpaper"
+        "waybar"
+      ];
       # exec-once = nm-applet &
       # exec-once = waybar & hyprpaper & firefox
 
@@ -182,8 +253,8 @@ in
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
-          force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-          disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
+          force_default_wallpaper = 0; # Set to 0 or 1 to disable the anime mascot wallpapers
+          disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
       };
 
 
