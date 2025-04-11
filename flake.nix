@@ -8,6 +8,11 @@
     };
     
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    ballsvim = {
+      url = "github:ballsten/nvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

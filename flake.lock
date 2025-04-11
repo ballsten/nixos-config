@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "ballsvim": {
+      "inputs": {
+        "nixCats": "nixCats",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1744373071,
+        "narHash": "sha256-kCQo2707W0QXbEpojlthjviVIMu0ubB5GMhM41n7azc=",
+        "owner": "ballsten",
+        "repo": "nvim-nix",
+        "rev": "9a9c4b8ff626201ca495e244eed690c037e8a05b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ballsten",
+        "repo": "nvim-nix",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -17,6 +38,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixCats": {
+      "locked": {
+        "lastModified": 1744009035,
+        "narHash": "sha256-zwGfDrhycyTl1CASAntRHsvC0jzGQaOx357v6sdo4M4=",
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
+        "rev": "1901a45f8cdc0976f58c41b66092a145036fc22d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
         "type": "github"
       }
     },
@@ -54,6 +90,7 @@
     },
     "root": {
       "inputs": {
+        "ballsvim": "ballsvim",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"

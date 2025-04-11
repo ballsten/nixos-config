@@ -170,6 +170,8 @@ in
     environment.systemPackages = with pkgs; [
       vim
       git
+      # TODO: this should be temporary
+      nix-config.inputs.ballsvim.packages.x86_64-linux.nvim
     ];
   };
 }
