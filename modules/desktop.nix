@@ -7,23 +7,26 @@
 }:
 
 let
-  inherit (config.modules.system) username;
-
+  inherit (lib.types) bool;
   inherit (lib)
+    mkOption
     mkEnableOption
     mkDefault
     mkIf
     mkMerge
     ;
 
-  cfg = config.modules.desktop;
+  cfg = config.modules;
 in
 {
   options.modules.desktop = {
-    enable = mkDefault false;
+    enabled = mkOption {
+      type = bool;
+      default = false;
+    };
   };
 
-  config = {
+  config = mkIf (cfg.desktop.enabled) {
     # TODO: what is this?
     hardware.graphics.enable32Bit = mkIf (pkgs.system == "x86_64-linux") true;
 
