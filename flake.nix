@@ -45,8 +45,8 @@
       #   }
       # );
 
-      nixosModules = genAttrs (map nameOf (listFilesRecursive ./modules)) (
-        name: import ./modules/${name}.nix
+      nixosModules = genAttrs (map nameOf (listFilesRecursive ./nixosModules)) (
+        name: import ./nixosModules/${name}.nix
       );
 
       homeModules = genAttrs (map nameOf (listFilesRecursive ./home)) (name: import ./home/${name}.nix);
