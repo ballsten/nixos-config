@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (lib.types) nullOr str listOf;
+  inherit (lib.types) nullOr str listOf bool;
   inherit (config.boot) isContainer;
 
   inherit (lib)
@@ -66,10 +66,15 @@ in
       type = str;
       default = "nixos";
     };
+
+    wsl = mkOption {
+      type = bool;
+      default = false;
+    };
   };
 
   config = {
-    boot = {
+    boot = mkIf (cfg.wsl == false ) {
       loader = {
         systemd-boot = {
           enable = true;
@@ -113,6 +118,11 @@ in
 
     system = {
       inherit (cfg) stateVersion;
+    };
+
+    wsl = mkIf (cfg.wsl) {
+      enable = cfg.wsl;
+      defaultUser = cfg.username;
     };
 
     users = {

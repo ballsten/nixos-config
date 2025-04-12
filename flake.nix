@@ -9,6 +9,11 @@
     
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ballsvim = {
       url = "github:ballsten/nvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +70,12 @@
           system = "x86_64-linux";
           specialArgs.nix-config = self;
           modules = listFilesRecursive ./hosts/surface-laptop;
+        };
+
+        wsl = nixosSystem {
+          system = "x86_64-linux";
+          specialArgs.nix-config = self;
+          modules = listFilesRecursive ./hosts/wsl;
         };
       };
 
