@@ -5,13 +5,9 @@ let
   nixos-wsl = nix-config.inputs.nixos-wsl;
 in
 {
-  imports = attrValues nix-config.nixosModules
-    # add in WSL module
     # TODO: should this be based on configuration?????
-    ++ [ nixos-wsl.nixosModules.wsl ];
-  # nixpkgs.overlays = attrValues nix-config.overlays;
+  imports = [ nixos-wsl.nixosModules.wsl ];
   home-manager.sharedModules = attrValues nix-config.homeModules;
-  # environment.systemPackages = attrValues nix-config.packages.${pkgs.system};
 
   modules = {
     system = {
