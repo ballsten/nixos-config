@@ -49,7 +49,7 @@
         name: import ./nixosModules/${name}.nix
       );
 
-      homeModules = genAttrs (map nameOf (listFilesRecursive ./home)) (name: import ./home/${name}.nix);
+      homeModules = genAttrs (map nameOf (listFilesRecursive ./homeManagerModules)) (name: import ./homeManagerModules/${name}.nix);
 
       # overlays = genAttrs (map nameOf (listFilesRecursive ./overlays)) (
       #   name: import ./overlays/${name}.nix
