@@ -36,26 +36,16 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: {
+  outputs = { nixpkgs, ... }@inputs: let
+    helperLib = import ./helperLib {inherit inputs;};
+  in
+  with helperLib; {
     nixosConfigurations = {
-      surface-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/surface-laptop/configuration.nix
-          ./nixosModules
-        ];
-      };
-      wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/wsl/configuration.nix
-          ./nixosModules
-        ];
-      };
+      surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
+      wsl = mkSystem ./hosts/wsl/configuration.nix;
     };
     
     homeManagerModules.default = ./homeManagerModules;
+    nixosModules.default = ./nixosModules;
   };
 }
