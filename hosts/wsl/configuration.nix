@@ -1,23 +1,23 @@
-{ nix-config, pkgs, ... }:
+###############################################################################
+#
+#  WSL system configuration
+#
+#  Majority of configuration should be parametised and handled by the 
+#  system module.
+#
+###############################################################################
 
-let
-  inherit (builtins) attrValues;
-  nixos-wsl = nix-config.inputs.nixos-wsl;
-in
 {
-    # TODO: should this be based on configuration?????
-  imports = [ nixos-wsl.nixosModules.wsl ];
-  home-manager.sharedModules = attrValues nix-config.homeModules;
-
+  # import WSL module
   modules = {
     system = {
       username = "ballsten";
       hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
       hostName = "wsl";
-      wsl = true;
+      variant= "wsl";
     };
-    desktop = {
-      enabled = false;
-    };
+    # desktop = {
+    #   enabled = false;
+    # };
   };
 }

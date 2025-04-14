@@ -1,3 +1,19 @@
+###############################################################################
+#
+#  My NixOS configuration
+#
+#  Designed to be modular to support multiple systems.
+#
+#  Currently supported: (see hosts/<system>/configuration.nix)
+#  - surface-laptop
+#  - wsl
+#  - VM (hyperV)
+#
+#  Uses home-manager to user configuration (see hosts/<system>/home.nix)
+#
+#
+###############################################################################
+
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -20,32 +36,18 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, ... }:
-    let
-      inherit (nixpkgs.lib) nixosSystem genAttrs replaceStrings;
-      inherit (nixpkgs.lib.filesystem) listFilesRecursive;
-
-      nameOf = path: replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString path));
-    in
-    {
-      homeModules = genAttrs (map nameOf (listFilesRecursive ./homeManagerModules)) (name: import ./homeManagerModules/${name}.nix);
-
-      nixosConfigurations = {
-        surface-laptop = nixosSystem {
-          system = "x86_64-linux";
-          specialArgs.nix-config = self;
-          modules = listFilesRecursive ./hosts/surface-laptop;
-        };
-
-        wsl = nixosSystem {
-          system = "x86_64-linux";
-          specialArgs.nix-config = self;
-          modules = [
-            ./hosts/wsl/configuration.nix
-            ./nixosModules
-          ];
-        };
+  outputs = { nixpkgs, ... }@inputs: {
+    nixosConfigurations = {
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/wsl/configuration.nix
+          ./nixosModules
+        ];
       };
     };
+    
+    homeManagerModules.default = ./homeManagerModules;
+  };
 }

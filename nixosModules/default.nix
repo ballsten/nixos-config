@@ -1,7 +1,8 @@
 {
   imports = [
-    ./system.nix
-    ./desktop.nix
-    ./fonts.nix
+    ./system
+    ./home-manager.nix
+    # ./desktop.nix
+    # ./fonts.nix
   ];
 }
