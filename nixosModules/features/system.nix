@@ -15,10 +15,10 @@ let
     hashedPassword
     ;
 
-  cfg = config.modules.system;
+  cfg = config.myNixOS.features.system;
 in
 {
-  options.modules.system = {
+  options.myNixOS.features.system = {
     username = mkOption {
       type = str;
       default = "user";

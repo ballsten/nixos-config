@@ -1,5 +1,5 @@
 { inputs, config, ...}: let
-  username = config.modules.system.username;
+  inherit (config.myNixOS.features.system) username stateVersion;
 in  {
 
   imports = [
@@ -20,7 +20,7 @@ in  {
         ];
         home = {
           homeDirectory = "/home/${username}";
-          stateVersion = config.modules.system.stateVersion;
+          stateVersion = stateVersion;
         };
       };
     };
