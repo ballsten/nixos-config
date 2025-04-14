@@ -18,11 +18,6 @@ let
   cfg = config.modules.system;
 in
 {
-  imports = [
-    # import variants
-    ./variants
-  ];
-
   options.modules.system = {
     username = mkOption {
       type = str;
@@ -66,10 +61,10 @@ in
 
   config = {
     # TODO: make this better
-    boot = mkIf (cfg.variant != "wsl" ) {
+    boot = {
       loader = {
         systemd-boot = {
-          enable = true;
+          enable = lib.mkDefault true;
           editor = false;
           configurationLimit = 10;
         };

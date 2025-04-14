@@ -38,6 +38,14 @@
 
   outputs = { nixpkgs, ... }@inputs: {
     nixosConfigurations = {
+      surface-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/surface-laptop/configuration.nix
+          ./nixosModules
+        ];
+      };
       wsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };

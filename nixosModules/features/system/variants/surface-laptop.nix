@@ -1,10 +1,9 @@
 { lib, config, inputs, ... }:
 {
   imports = [
-    inputs.nixos-wsl.nixosModules.wsl
   ];
 
-  config = lib.mkIf (config.modules.system.variant == "wsl") {
+  config = lib.mkIf (config.modules.system.variant == "surface-intel") {
     wsl = {
       enable = true;
       defaultUser = config.modules.system.username;
