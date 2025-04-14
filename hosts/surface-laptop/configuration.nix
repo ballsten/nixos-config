@@ -12,6 +12,7 @@ let
 in
 {
   imports = [ 
+    ./hardware-configuration.nix
     nixos-hardware.nixosModules.microsoft-surface-pro-intel
   ];
 
