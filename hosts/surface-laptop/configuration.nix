@@ -1,16 +1,20 @@
-{ nix-config, pkgs, ... }:
-
+###############################################################################
+#
+#  Surface laptop system configuration
+#
+#  Majority of configuration should be parametised and handled by the 
+#  system module.
+#
+###############################################################################
+{ inputs, ... }:
 let
-  inherit (builtins) attrValues;
-  nixos-hardware = nix-config.inputs.nixos-hardware;
+  inherit (inputs) nixos-hardware;
 in
 {
-  imports = attrValues nix-config.nixosModules 
-    # add in linux-surface kernel
-    ++ [ nixos-hardware.nixosModules.microsoft-surface-pro-intel ];
-  # nixpkgs.overlays = attrValues nix-config.overlays;
-  home-manager.sharedModules = attrValues nix-config.homeModules;
-  # environment.systemPackages = attrValues nix-config.packages.${pkgs.system};
+  imports = [ 
+    ./hardware-configuration.nix
+    nixos-hardware.nixosModules.microsoft-surface-pro-intel
+  ];
 
   modules = {
     system = {

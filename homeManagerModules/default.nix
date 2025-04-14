@@ -2,6 +2,6 @@
   imports = [
     ./bash.nix
     ./git.nix
-    # ./hyprland.nix
+    ./hyprland.nix
   ];
 }
