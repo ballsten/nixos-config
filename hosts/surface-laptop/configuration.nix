@@ -16,8 +16,11 @@ in
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.microsoft-surface-pro-intel
   ];
-
   
+  # enable bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   myNixOS= {
     bundles = {
       base.enable = true;
