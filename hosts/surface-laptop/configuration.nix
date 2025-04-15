@@ -11,6 +11,7 @@ let
   inherit (inputs) nixos-hardware;
 in
 {
+  # surface-laptop specific import, hardware and linux-surface kernel
   imports = [ 
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.microsoft-surface-pro-intel
