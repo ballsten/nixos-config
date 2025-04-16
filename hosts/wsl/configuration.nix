@@ -42,4 +42,9 @@ in
       hostName = "wsl";
     };
   };
+
+  # home configuration
+  myHomeManager = {
+    bundles.base.enable = true;
+  };
 }
