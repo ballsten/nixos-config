@@ -1,27 +1,51 @@
-{ nix-config, pkgs, ... }:
-
+###############################################################################
+#
+#  WSL system configuration
+#
+#  Majority of configuration should be parametised and handled by the 
+#  system module.
+#
+###############################################################################
+{ inputs, config, lib, ...}:
 let
-  inherit (builtins) attrValues;
-  nixos-wsl = nix-config.inputs.nixos-wsl;
+  inherit (inputs) nixos-wsl;
+  inherit (config.myNixOS.features.system) username;
 in
 {
-  imports = attrValues nix-config.nixosModules
-    # add in WSL module
-    # TODO: should this be based on configuration?????
-    ++ [ nixos-wsl.nixosModules.wsl ];
-  # nixpkgs.overlays = attrValues nix-config.overlays;
-  home-manager.sharedModules = attrValues nix-config.homeModules;
-  # environment.systemPackages = attrValues nix-config.packages.${pkgs.system};
+  # WSL specific imports
+  imports = [
+    nixos-wsl.nixosModules.wsl
+  ];
 
-  modules = {
-    system = {
-      username = "ballsten";
-      hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
-      hostName = "wsl";
-      wsl = true;
+  wsl = {
+    enable = true;
+    defaultUser = username;
+  };
+
+  # Disable the boot loader for WSL
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  # set platform for wsl
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+
+  # system configuration
+  myNixOS= {
+    bundles = {
+      base.enable = true;
+      desktop.enable = false;
     };
-    desktop = {
-      enabled = false;
+
+    features = {
+      system = {
+        username = "ballsten";
+        hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
+        hostName = "wsl";
+      };
+      home-manager = {
+        userConfig = ./home.nix;
+      };
     };
+    
   };
 }

@@ -1,14 +1,6 @@
-{
-  nix-config,
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-
+{ pkgs, lib, config, inputs, ... }:
 let
   inherit (lib.types) nullOr str listOf bool;
-  inherit (config.boot) isContainer;
 
   inherit (lib)
     mkOption
@@ -23,12 +15,10 @@ let
     hashedPassword
     ;
 
-  cfg = config.modules.system;
+  cfg = config.myNixOS.features.system;
 in
 {
-  imports = with nix-config.inputs.home-manager.nixosModules; [ home-manager ];
-
-  options.modules.system = {
+  options.myNixOS.features.system = {
     username = mkOption {
       type = str;
       default = "user";
@@ -67,17 +57,14 @@ in
       default = "nixos";
     };
 
-    wsl = mkOption {
-      type = bool;
-      default = false;
-    };
   };
 
   config = {
-    boot = mkIf (cfg.wsl == false ) {
+    # TODO: make this better
+    boot = {
       loader = {
         systemd-boot = {
-          enable = true;
+          enable = lib.mkDefault true;
           editor = false;
           configurationLimit = 10;
         };
@@ -120,11 +107,6 @@ in
       inherit (cfg) stateVersion;
     };
 
-    wsl = mkIf (cfg.wsl) {
-      enable = cfg.wsl;
-      defaultUser = cfg.username;
-    };
-
     users = {
       mutableUsers = false;
 
@@ -142,25 +124,6 @@ in
       };
     };
 
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-
-      sharedModules = singleton {
-        home = {
-          inherit (cfg) stateVersion;
-        };
-
-        programs.man.generateCaches = true;
-      };
-
-      users.${username}.home = {
-        inherit username;
-
-        homeDirectory = "/home/${username}";
-      };
-    };
-
     networking = {
       inherit (cfg) hostName;
 
@@ -171,17 +134,12 @@ in
 
     security.sudo.wheelNeedsPassword = false;
 
-    # TODO: Come back to this
-    #  environment = {
-    #  systemPackages = with pkgs; [ (pass.withExtensions (ext: with ext; [ pass-otp ])) ];
-    #  gnome.excludePackages = with pkgs; [ gnome-tour ];
-    # };
-
     environment.systemPackages = with pkgs; [
       vim
       git
+      lazygit
       # TODO: this should be temporary
-      nix-config.inputs.ballsvim.packages.x86_64-linux.nvim
+      inputs.ballsvim.packages.x86_64-linux.nvim
     ];
   };
 }

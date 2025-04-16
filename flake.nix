@@ -1,3 +1,19 @@
+###############################################################################
+#
+#  My NixOS configuration
+#
+#  Designed to be modular to support multiple systems.
+#
+#  Currently supported: (see hosts/<system>/configuration.nix)
+#  - surface-laptop
+#  - wsl
+#  - VM (hyperV)
+#
+#  Uses home-manager to user configuration (see hosts/<system>/home.nix)
+#
+#
+###############################################################################
+
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -20,65 +36,16 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, ... }:
-    let
-      inherit (nixpkgs.lib) nixosSystem genAttrs replaceStrings;
-      inherit (nixpkgs.lib.filesystem) packagesFromDirectoryRecursive listFilesRecursive;
-
-      forAllSystems =
-        function:
-        genAttrs [
-          "x86_64-linux"
-          "aarch64-linux"
-        ] (system: function nixpkgs.legacyPackages.${system});
-
-      nameOf = path: replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString path));
-    in
-    {
-      # packages = forAllSystems (
-      #   pkgs:
-      #   packagesFromDirectoryRecursive {
-      #     inherit (pkgs) callPackage;
-
-      #     directory = ./packages;
-      #   }
-      # );
-
-      nixosModules = genAttrs (map nameOf (listFilesRecursive ./modules)) (
-        name: import ./modules/${name}.nix
-      );
-
-      homeModules = genAttrs (map nameOf (listFilesRecursive ./home)) (name: import ./home/${name}.nix);
-
-      # overlays = genAttrs (map nameOf (listFilesRecursive ./overlays)) (
-      #   name: import ./overlays/${name}.nix
-      # );
-
-      checks = forAllSystems (
-        pkgs:
-        genAttrs (map nameOf (listFilesRecursive ./tests)) (
-          name:
-          import ./tests/${name}.nix {
-            inherit self pkgs;
-          }
-        )
-      );
-
-      nixosConfigurations = {
-        surface-laptop = nixosSystem {
-          system = "x86_64-linux";
-          specialArgs.nix-config = self;
-          modules = listFilesRecursive ./hosts/surface-laptop;
-        };
-
-        wsl = nixosSystem {
-          system = "x86_64-linux";
-          specialArgs.nix-config = self;
-          modules = listFilesRecursive ./hosts/wsl;
-        };
-      };
-
-      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+  outputs = { nixpkgs, ... }@inputs: let
+    helperLib = import ./helperLib {inherit inputs;};
+  in
+  with helperLib; {
+    nixosConfigurations = {
+      surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
+      wsl = mkSystem ./hosts/wsl/configuration.nix;
     };
+    
+    homeManagerModules.default = ./homeManagerModules;
+    nixosModules.default = ./nixosModules;
+  };
 }
