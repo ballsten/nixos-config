@@ -36,15 +36,16 @@ in
       desktop.enable = false;
     };
 
-    features.system = {
-      username = "ballsten";
-      hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
-      hostName = "wsl";
+    features = {
+      system = {
+        username = "ballsten";
+        hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
+        hostName = "wsl";
+      };
+      home-manager = {
+        userConfig = ./home.nix;
+      };
     };
-  };
-
-  # home configuration
-  myHomeManager = {
-    bundles.base.enable = true;
+    
   };
 }
