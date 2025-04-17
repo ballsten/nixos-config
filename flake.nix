@@ -43,6 +43,7 @@
     nixosConfigurations = {
       surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
       wsl = mkSystem ./hosts/wsl/configuration.nix;
+      tiki-rig = mkSystem ./hosts/tiki-rig/configuration.nix;
     };
     
     homeManagerModules.default = ./homeManagerModules;
