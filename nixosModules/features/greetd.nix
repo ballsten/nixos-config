@@ -17,12 +17,21 @@
   '';
 in
 {
+  environment.systemPackages = with pkgs; [
+    nordic
+  ];
   programs.regreet = {
     enable = true;
     settings = {
       background = {
         path = builtins.toString wallpaper;
         fit = "Cover";
+      };
+      GTK = {
+        theme_name = lib.mkForce "Nordic";
+        icon_theme_name = lib.mkForce "Nordic";
+        cursor_theme_name = lib.mkForce "Nordic";
+        application_prefer_dark_theme = lib.mkForce true;
       };
     };
   };
