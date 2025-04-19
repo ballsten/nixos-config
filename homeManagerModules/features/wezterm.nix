@@ -1,10 +1,10 @@
 #
 # Feature: wezterm
 #
-# Install and configure wezterm just how I like Install
+# Install and configure wezterm just how I like it
 
 
-{ pkgs, ... }:
+{ ... }:
 {
   programs.wezterm = {
     enable = true;
