@@ -1,16 +1,27 @@
-{ pkgs, lib, ... }: let
+{ pkgs, lib, config, ... }: let
   wallpaper = pkgs.fetchurl {
     url = "http://files.theaker.name/wallpaper/futuristic-spaceship-pilot.jpg";
     hash = "sha256-fM8HGoicFjSpUOVM2RIOGP7QQ+BTQw0Yotp5ObxBM9Q=";
   };
+  cfg = config.myHomeManager.features.hyprland;
 in
 {
-  # TODO: change to wezterm
+  options = {
+    myHomeManager.features.hyprland = {
+      terminal = lib.mkOption {
+        type = lib.types.str;
+        default = "wezterm";
+        description = "the default terminal program for hyprland";
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     hyprpicker
   ];
 
-  programs.kitty.enable = true;
+  # TODO: modularize these (terminal already done) but enable programs
+  # programs.kitty.enable = true;
   programs.firefox.enable = true;
 
   programs.waybar = {
@@ -111,7 +122,7 @@ in
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "kitty";
+      "$terminal" = cfg.terminal;
       "$browser" = "firefox";
 
       # TODO: probably use these at some point
