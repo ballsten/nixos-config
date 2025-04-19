@@ -11,7 +11,9 @@
   ];
     # home configuration
   myHomeManager = {
-    bundles.base.enable = true;
-    features.hyprland.enable = true;
+    bundles = {
+      base.enable = true;
+      desktop.enable = true;
+    };
   };
 }
