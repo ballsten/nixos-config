@@ -20,7 +20,8 @@ in
     hyprpicker
   ];
 
-  programs.kitty.enable = true;
+  # TODO: modularize these (terminal already done) but enable programs
+  # programs.kitty.enable = true;
   programs.firefox.enable = true;
 
   programs.waybar = {
