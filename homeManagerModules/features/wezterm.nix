@@ -1,4 +1,3 @@
-#
 # Feature: wezterm
 #
 # Install and configure wezterm just how I like it
@@ -17,7 +16,7 @@
       
       config.hide_tab_bar_if_only_one_tab = true
 
-      config.colors = dofile("${inputs.nixpkgs.legacyPackages.x86_64-linux.vimPlugins.cyberdream-nvim}/extras/wezterm/cyberdream.lua")
+      config.color_scheme = "Catppuccin Mocha"
 
       return config
     '';
