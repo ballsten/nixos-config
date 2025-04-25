@@ -137,7 +137,6 @@ in
     environment.systemPackages = with pkgs; [
       vim
       git
-      lazygit
       # TODO: this should be temporary
       inputs.ballsvim.packages.x86_64-linux.ballsvim
     ];
