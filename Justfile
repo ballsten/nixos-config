@@ -26,6 +26,9 @@ history:
 repl:
   nix repl -f flake:nixpkgs
 
+replf:
+  nix repl --expr "builtins.getFlake \"$PWD\""
+
 clean:
   # remove all generations older than 7 days
   sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
