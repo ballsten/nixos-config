@@ -1,7 +1,9 @@
-
-{ lib, ... }: let
+{ lib, ... }:
+let
   inherit (lib) mkDefault;
-in {
+in
+{
   myHomeManager.features.hyprland.enable = mkDefault true;
   myHomeManager.features.wezterm.enable = mkDefault true;
+  myHomeManager.features.logseq.enable = mkDefault true;
 }
