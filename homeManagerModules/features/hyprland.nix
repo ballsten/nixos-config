@@ -227,11 +227,12 @@ in
     };
   };
   ##
-  # Waybar configuration
+  # wofi configuration
   ##
   programs.wofi = {
     enable = true;
     settings = {
+      show = "drun";
       width = "40%";
       lines = 11;
       hide_scroll = true;
@@ -523,7 +524,7 @@ in
       "$terminal" = cfg.terminal;
       "$browser" = "firefox";
       "$lockscreen" = "hyprlock";
-      "$menu" = "wofi --show drun";
+      "$menu" = "wofi";
 
       # TODO: probably use these at some point
       # $fileManager = dolphin
