@@ -2,26 +2,33 @@
 #
 #  Surface laptop system configuration
 #
-#  Majority of configuration should be parametised and handled by the 
+#  Majority of configuration should be parametised and handled by the
 #  system module.
 #
 ###############################################################################
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 let
   inherit (inputs) nixos-hardware;
 in
 {
   # surface-laptop specific import, hardware and linux-surface kernel
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.microsoft-surface-pro-intel
   ];
-  
+
+  # configure which unfree software this system allows
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (pkgs.lib.getName pkg) [
+      "obsidian"
+    ];
+
   # enable bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  myNixOS= {
+  myNixOS = {
     bundles = {
       base.enable = true;
       desktop.enable = true;
