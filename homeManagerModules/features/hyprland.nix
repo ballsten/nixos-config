@@ -13,6 +13,10 @@ let
     url = "http://files.theaker.name/wallpaper/spaceship-cliff-face.jpg";
     hash = "sha256-cfe76pEQ/6FL9tX4qK0hD7vPfxJPseXOe4y7g/eEKtM=";
   };
+  avatar = pkgs.fetchurl {
+    url = "http://files.theaker.name/images/ballsten-avatar-240x240.jpg";
+    hash = "sha256-weOqsOTX+vKzZ5bK3M7TexKPOiELlHX0D1t/MoF9mYM=";
+  };
   cfg = config.myHomeManager.features.hyprland;
 in
 {
@@ -192,15 +196,15 @@ in
       ];
 
       # USER AVATAR
-      # image = {
-      #   monitor =
-      #   path = $HOME/.face
-      #   size = 100
-      #   border_color = $accent
-      #   position = 0, 75
-      #   halign = center
-      #   valign = center
-      # }
+      image = {
+        # monitor =
+        path = builtins.toString avatar;
+        size = 100;
+        border_color = "$accent";
+        position = "0, 75";
+        halign = "center";
+        valign = "center";
+      };
 
       # INPUT FIELD
       input-field = {
