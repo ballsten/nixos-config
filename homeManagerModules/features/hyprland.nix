@@ -13,6 +13,10 @@ let
     url = "http://files.theaker.name/wallpaper/spaceship-cliff-face.jpg";
     hash = "sha256-cfe76pEQ/6FL9tX4qK0hD7vPfxJPseXOe4y7g/eEKtM=";
   };
+  avatar = pkgs.fetchurl {
+    url = "http://files.theaker.name/images/ballsten-avatar-240x240.jpg";
+    hash = "sha256-weOqsOTX+vKzZ5bK3M7TexKPOiELlHX0D1t/MoF9mYM=";
+  };
   cfg = config.myHomeManager.features.hyprland;
 in
 {
@@ -192,15 +196,15 @@ in
       ];
 
       # USER AVATAR
-      # image = {
-      #   monitor =
-      #   path = $HOME/.face
-      #   size = 100
-      #   border_color = $accent
-      #   position = 0, 75
-      #   halign = center
-      #   valign = center
-      # }
+      image = {
+        # monitor =
+        path = builtins.toString avatar;
+        size = 100;
+        border_color = "$accent";
+        position = "0, 75";
+        halign = "center";
+        valign = "center";
+      };
 
       # INPUT FIELD
       input-field = {
@@ -226,6 +230,42 @@ in
       };
     };
   };
+  ##
+  # hypridle configuration
+  ##
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+      listener = [
+        # TODO: brightnessctl only works on the laptop
+        {
+          timeout = 150;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 330;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+        }
+        {
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+
+    };
+  };
+
   ##
   # wofi configuration
   ##
