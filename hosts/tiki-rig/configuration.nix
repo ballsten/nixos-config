@@ -2,18 +2,22 @@
 #
 #  Surface laptop system configuration
 #
-#  Majority of configuration should be parametised and handled by the 
+#  Majority of configuration should be parametised and handled by the
 #  system module.
 #
 ###############################################################################
-{ config, ... }:
+{ config, pkgs, ... }:
 {
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
   ];
-  
-  # enable unfree software (mainly for the nvidia drivers
-  nixpkgs.config.allowUnfree = true;
+
+  # configure which unfree software this system allows
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (pkgs.lib.getName pkg) [
+      "obsidian"
+    ];
 
   # enable nvidia
   hardware.graphics.enable = true;
@@ -26,7 +30,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
-  
+
   # setup dual boot for windows
   boot.loader.systemd-boot.windows = {
     "11-home" = {
@@ -35,8 +39,8 @@
       sortKey = "z_windows";
     };
   };
-  
-  myNixOS= {
+
+  myNixOS = {
     bundles = {
       base.enable = true;
       desktop.enable = true;

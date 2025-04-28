@@ -226,6 +226,26 @@ in
       };
     };
   };
+  ##
+  # Waybar configuration
+  ##
+  programs.wofi = {
+    enable = true;
+    settings = {
+      width = "40%";
+      lines = 11;
+
+      hide_scroll = true;
+      allow_images = true;
+      image_size = 25;
+      prompt = "Search...";
+      normal_window = false;
+
+      matching = "fuzzy";
+      insensitive = true;
+      columns = 2;
+    };
+  };
 
   ##
   # Waybar configuration
@@ -338,10 +358,10 @@ in
       "$terminal" = cfg.terminal;
       "$browser" = "firefox";
       "$lockscreen" = "hyprlock";
+      "$menu" = "wofi --show drun";
 
       # TODO: probably use these at some point
       # $fileManager = dolphin
-      # $menu = wofi --show drun
 
       #################
       ### AUTOSTART ###
