@@ -411,8 +411,8 @@ in
           escape = true;
           interval = 5;
           tooltip = false;
-          # exec = "playerctl metadata --format='{{ title }}'";
-          # on-click = "playerctl play-pause";
+          exec = "playerctl metadata --format='{{ title }}'";
+          on-click = "playerctl play-pause";
           max-length = 50;
         };
         clock = {
