@@ -17,6 +17,14 @@ let
     url = "http://files.theaker.name/images/ballsten-avatar-240x240.jpg";
     hash = "sha256-weOqsOTX+vKzZ5bK3M7TexKPOiELlHX0D1t/MoF9mYM=";
   };
+  catppuccin-theme = (
+    pkgs.catppuccin.override {
+      variant = "mocha";
+      accent = "green";
+    }
+  );
+  hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
+  waybarThemeConf = (builtins.toString catppuccin-theme) + "/waybar/mocha.css";
   cfg = config.myHomeManager.features.hyprland;
 in
 {
@@ -32,95 +40,8 @@ in
 
   home.packages = with pkgs; [
     hyprpicker
+    catppuccin-theme
   ];
-
-  ##
-  # Themeing
-  ##
-  home.file = {
-    hyprlandTheme = {
-      target = ".config/hypr/mocha.conf";
-      text = ''
-        $rosewater = rgb(f5e0dc)
-        $rosewaterAlpha = f5e0dc
-
-        $flamingo = rgb(f2cdcd)
-        $flamingoAlpha = f2cdcd
-
-        $pink = rgb(f5c2e7)
-        $pinkAlpha = f5c2e7
-
-        $mauve = rgb(cba6f7)
-        $mauveAlpha = cba6f7
-
-        $red = rgb(f38ba8)
-        $redAlpha = f38ba8
-
-        $maroon = rgb(eba0ac)
-        $maroonAlpha = eba0ac
-
-        $peach = rgb(fab387)
-        $peachAlpha = fab387
-
-        $yellow = rgb(f9e2af)
-        $yellowAlpha = f9e2af
-
-        $green = rgb(a6e3a1)
-        $greenAlpha = a6e3a1
-
-        $teal = rgb(94e2d5)
-        $tealAlpha = 94e2d5
-
-        $sky = rgb(89dceb)
-        $skyAlpha = 89dceb
-
-        $sapphire = rgb(74c7ec)
-        $sapphireAlpha = 74c7ec
-
-        $blue = rgb(89b4fa)
-        $blueAlpha = 89b4fa
-
-        $lavender = rgb(b4befe)
-        $lavenderAlpha = b4befe
-
-        $text = rgb(cdd6f4)
-        $textAlpha = cdd6f4
-
-        $subtext1 = rgb(bac2de)
-        $subtext1Alpha = bac2de
-
-        $subtext0 = rgb(a6adc8)
-        $subtext0Alpha = a6adc8
-
-        $overlay2 = rgb(9399b2)
-        $overlay2Alpha = 9399b2
-
-        $overlay1 = rgb(7f849c)
-        $overlay1Alpha = 7f849c
-
-        $overlay0 = rgb(6c7086)
-        $overlay0Alpha = 6c7086
-
-        $surface2 = rgb(585b70)
-        $surface2Alpha = 585b70
-
-        $surface1 = rgb(45475a)
-        $surface1Alpha = 45475a
-
-        $surface0 = rgb(313244)
-        $surface0Alpha = 313244
-
-        $base = rgb(1e1e2e)
-        $baseAlpha = 1e1e2e
-
-        $mantle = rgb(181825)
-        $mantleAlpha = 181825
-
-        $crust = rgb(11111b)
-        $crustAlpha = 11111b
-      '';
-    };
-  };
 
   ##
   # Main applications
@@ -135,10 +56,10 @@ in
   programs.hyprlock = {
     enable = true;
     settings = {
-      source = "$HOME/.config/hypr/mocha.conf";
+      source = hyprlandThemeConf;
 
-      "$accent" = "$mauve";
-      "$accentAlpha" = "$mauveAlpha";
+      "$accent" = "$green";
+      "$accentAlpha" = "$greenAlpha";
       "$font" = "FiraCode Nerd Font";
 
       # GENERAL
@@ -201,7 +122,7 @@ in
         path = builtins.toString avatar;
         size = 100;
         border_color = "$accent";
-        position = "0, 75";
+        position = "0, -19%";
         halign = "center";
         valign = "center";
       };
@@ -224,7 +145,7 @@ in
         fail_color = "$red";
         fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
         capslock_color = "$yellow";
-        position = "0, -47";
+        position = "0, -25%";
         halign = "center";
         valign = "center";
       };
@@ -463,12 +384,67 @@ in
         layer = "top";
         position = "bottom";
         modules-left = [ "hyprland/workspaces" ];
+        modules-center = [ "custom/music" ];
         modules-right = [
+          "pulseaudio"
+          "backlight"
           "battery"
           "clock"
+          "tray"
+          "custom/lock"
+          "custom/power"
         ];
+        "hyprland/workspaces" = {
+          disable-scroll = true;
+          sort-by-name = true;
+          format = " {icon} ";
+          format-icons = {
+            default = "";
+          };
+        };
+        tray = {
+          icon-size = 21;
+          spacing = 10;
+        };
+        "custom/music" = {
+          format = "  {}";
+          escape = true;
+          interval = 5;
+          tooltip = false;
+          # exec = "playerctl metadata --format='{{ title }}'";
+          # on-click = "playerctl play-pause";
+          max-length = 50;
+        };
+        clock = {
+          timezone = "Australia/Sydney";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          format-alt = " {:%d/%m/%Y}";
+          format = " {:%H:%M}";
+        };
+        backlight = {
+          device = "intel_backlight";
+          format = "{icon}";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
         battery = {
-          format = "{capacity}% {icon}";
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          format = "{icon}";
+          format-charging = "";
+          format-plugged = "";
+          format-alt = "{icon}";
           format-icons = [
             ""
             ""
@@ -477,53 +453,133 @@ in
             ""
           ];
         };
-        clock = {
-          format-alt = "{:%a, %d. %b  %H:%M}";
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = "";
+          format-icons = {
+            default = [
+              ""
+              ""
+              " "
+            ];
+          };
+          #on-click = "pavucontrol";
+        };
+        "custom/lock" = {
+          tooltip = false;
+          on-click = "sh -c '(sleep 0.5s; loginctl suspend )' & disown";
+          format = "";
+        };
+        "custom/power" = {
+          tooltip = false;
+          on-click = "wlogout &";
+          format = "⏻";
         };
       };
     };
     style = ''
+      @import '${waybarThemeConf}';
+
       * {
-        border: none;
-        border-radius: 0;
         font-family: FiraCode Nerd Font;
-        font-size: 18px;
+        font-size: 12px;
         min-height: 0;
       }
 
-      window#waybar {
-        background: #000000;
-        color: #e5e9f0;
+      #waybar {
+        background-color: shade(@base, 0.9);
+        border: 2px solid alpha(@crust, 0.3);
+        color: @text;
+        margin: 5px 5px;
+      }
+
+      #workspaces {
+        border-radius: 1rem;
+        margin: 5px;
+        background-color: @surface0;
+        margin-left: 1rem;
       }
 
       #workspaces button {
-        padding: 0 5px;
-        background: transparent;
-        color: #ffffff;
-        border-bottom: 3px solid transparent;
+        color: @lavender;
+        border-radius: 1rem;
+        padding: 0.4rem;
       }
 
       #workspaces button.focused {
-        background: #4c566a;
-        border-bottom: 3px solid #e5e9f0;
+        color: @sky;
+        border-radius: 1rem;
       }
 
-      #workspaces button.urgent {
-        background-color: #bf616a;
+      #workspaces button:hover {
+        color: @sapphire;
+        border-radius: 1rem;
       }
 
-      #mode {
-        background: #64727D;
-        border-bottom: 3px solid #ffffff;
+      #custom-music,
+      #tray,
+      #backlight,
+      #clock,
+      #battery,
+      #pulseaudio,
+      #custom-lock,
+      #custom-power {
+        background-color: @surface0;
+        padding: 0.5rem 1rem;
+        margin: 5px 0;
       }
 
-      #clock #battery #mode {
-        padding: 0 10px;
-        margin: 0 10px;
+      #clock {
+        color: @blue;
+        border-radius: 0px 1rem 1rem 0px;
+        margin-right: 1rem;
       }
 
       #battery {
-        margin-right: 30px;
+        color: @green;
+      }
+
+      #battery.charging {
+        color: @green;
+      }
+
+      #battery.warning:not(.charging) {
+        color: @red;
+      }
+
+      #backlight {
+        color: @yellow;
+      }
+
+      #backlight, #battery {
+          border-radius: 0;
+      }
+
+      #pulseaudio {
+        color: @maroon;
+        border-radius: 1rem 0px 0px 1rem;
+        margin-left: 1rem;
+      }
+
+      #custom-music {
+        color: @mauve;
+        border-radius: 1rem;
+      }
+
+      #custom-lock {
+          border-radius: 1rem 0px 0px 1rem;
+          color: @lavender;
+      }
+
+      #custom-power {
+          margin-right: 1rem;
+          border-radius: 0px 1rem 1rem 0px;
+          color: @red;
+      }
+
+      #tray {
+        margin-right: 1rem;
+        border-radius: 1rem;
       }
     '';
   };
