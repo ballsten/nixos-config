@@ -606,6 +606,7 @@ in
     enable = true;
 
     settings = {
+      source = hyprlandThemeConf;
 
       ################
       ### MONITORS ###
@@ -639,6 +640,8 @@ in
       exec-once = [
         "hyprpaper"
         "waybar"
+        "[workspace 1 silent] $terminal"
+        "[workspace 2 silent] $browser"
       ];
       # exec-once = nm-applet &
       # exec-once = waybar & hyprpaper & firefox
@@ -668,8 +671,8 @@ in
         border_size = 2;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" = "$green $sapphire 45deg";
+        "col.inactive_border" = "$overlay0";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false;
