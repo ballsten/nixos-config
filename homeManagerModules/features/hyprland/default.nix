@@ -34,6 +34,7 @@ in
 
   imports = [
     (import ./waybar.nix { inherit catppuccin-theme; })
+    ./hyprsunset.nix
   ];
 
   home.packages = with pkgs; [
