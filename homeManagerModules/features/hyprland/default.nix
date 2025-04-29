@@ -40,6 +40,7 @@ in
   home.packages = with pkgs; [
     hyprpicker
     catppuccin-theme
+    catppuccin-cursors.mochaGreen
   ];
 
   ##
@@ -446,7 +447,7 @@ in
       # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
       env = [
-        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_THEME,catppuccin-mocha-green-cursors"
         "HYPRCURSOR_SIZE,24"
       ];
 
