@@ -418,7 +418,6 @@ in
         clock = {
           timezone = "Australia/Sydney";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          format-alt = " {:%d/%m/%Y}";
           format = " {:%H:%M}";
         };
         backlight = {
@@ -467,7 +466,7 @@ in
         };
         "custom/lock" = {
           tooltip = false;
-          on-click = "sh -c '(sleep 0.5s; loginctl suspend )' & disown";
+          on-click = "sh -c '(sleep 0.5s; loginctl lock-session )' & disown";
           format = "";
         };
         "custom/power" = {
@@ -496,23 +495,28 @@ in
       #workspaces {
         border-radius: 1rem;
         margin: 5px;
-        background-color: @surface0;
+        background-color: @surface1;
         margin-left: 1rem;
       }
 
       #workspaces button {
-        color: @lavender;
+        color: @blue;
         border-radius: 1rem;
         padding: 0.4rem;
       }
 
-      #workspaces button.focused {
-        color: @sky;
+      #workspaces button.active {
+        color: @green;
+        border-radius: 1rem;
+      }
+
+      #workspaces button.urgent {
+        color: @yellow;
         border-radius: 1rem;
       }
 
       #workspaces button:hover {
-        color: @sapphire;
+        color: @maroon;
         border-radius: 1rem;
       }
 
