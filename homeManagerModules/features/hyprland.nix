@@ -602,6 +602,14 @@ in
     };
   };
 
+  ##
+  # Applets
+  ##
+  services.network-manager-applet.enable = true;
+
+  ##
+  # Wayland configuration
+  ##
   wayland.windowManager.hyprland = {
     enable = true;
 
