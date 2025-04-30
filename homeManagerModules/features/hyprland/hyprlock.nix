@@ -1,7 +1,11 @@
 ##
 # Hyprlock to display the lock screen
 ##
-{ pkgs, catppuccin-theme, ... }:
+{
+  pkgs,
+  catppuccin-theme,
+  ...
+}:
 let
   loginpaper = pkgs.fetchurl {
     url = "http://files.theaker.name/wallpaper/spaceship-cliff-face.jpg";
@@ -14,6 +18,9 @@ let
   hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
 in
 {
+  home.packages = [
+    pkgs.nerd-fonts.fira-code
+  ];
   programs.hyprlock = {
     enable = true;
     settings = {

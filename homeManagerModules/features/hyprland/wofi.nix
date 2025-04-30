@@ -1,7 +1,10 @@
 ##
 # Wofi for a cool menu
 ##
-{ ... }:
+{ config, ... }:
+let
+  cfg = config.myHomeManager.features;
+in
 {
   programs.wofi = {
     enable = true;
@@ -74,8 +77,8 @@
       @define-color	crust-rgb  rgb(17, 17, 27);
 
       * {
-        font-family: 'FiraCode Nerd Font', monospace;
-        font-size: 14px;
+        font-family: '${cfg.fonts.nerdFont} Nerd Font', monospace;
+        font-size: ${cfg.fonts.nerdFontSize}pt;
       }
 
       /* Window */

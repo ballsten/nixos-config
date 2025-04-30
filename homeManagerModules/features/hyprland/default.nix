@@ -21,8 +21,8 @@ in
   };
 
   imports = [
-    (import ./waybar.nix { inherit catppuccin-theme; })
-    (import ./hyprlock.nix { inherit pkgs catppuccin-theme; })
+    (import ./waybar.nix { inherit catppuccin-theme config; })
+    (import ./hyprlock.nix { inherit pkgs catppuccin-theme config; })
     ./wofi.nix
     ./hypridle.nix
     ./hyprpaper.nix
@@ -31,6 +31,7 @@ in
 
   home.packages = with pkgs; [
     hyprpicker
+    wl-clipboard
     catppuccin-theme
     catppuccin-cursors.mochaGreen
   ];
