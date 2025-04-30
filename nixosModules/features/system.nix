@@ -1,15 +1,11 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 let
-  inherit (lib.types) nullOr str listOf bool;
-
-  inherit (lib)
-    mkOption
-    mkEnableOption
-    mkIf
-    singleton
-    optional
-    ;
-
   inherit (cfg)
     username
     hashedPassword
@@ -19,44 +15,57 @@ let
 in
 {
   options.myNixOS.features.system = {
-    username = mkOption {
-      type = str;
+    username = lib.mkOption {
+      type = lib.types.str;
       default = "user";
     };
 
-    hashedPassword = mkOption {
-      type = nullOr str;
+    hashedPassword = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
       default = null;
     };
 
-    timeZone = mkOption {
-      type = str;
+    timeZone = lib.mkOption {
+      type = lib.types.str;
       default = "Australia/Sydney";
     };
 
-    defaultLocale = mkOption {
-      type = str;
+    defaultLocale = lib.mkOption {
+      type = lib.types.str;
       default = "en_US.UTF-8";
     };
 
-    supportedLocales = mkOption {
-      type = listOf str;
+    supportedLocales = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
 
       default = [
         "en_US.UTF-8/UTF-8"
       ];
     };
 
-    stateVersion = mkOption {
-      type = str;
+    stateVersion = lib.mkOption {
+      type = lib.types.str;
       default = "24.11";
     };
 
-    hostName = mkOption {
-      type = str;
+    hostName = lib.mkOption {
+      type = lib.types.str;
       default = "nixos";
     };
 
+    shell = lib.mkOption {
+      type = lib.types.enum (
+        with pkgs;
+        [
+          bash
+          fish
+        ]
+      );
+      default = pkgs.bash;
+      description = ''
+        Set the shell for this user
+      '';
+    };
   };
 
   config = {
@@ -107,20 +116,27 @@ in
       inherit (cfg) stateVersion;
     };
 
+    # enable the correct shell
+    # bash is always enabled
+    programs = {
+      fish.enable = lib.mkIf (cfg.shell == pkgs.fish) true;
+    };
+
     users = {
       mutableUsers = false;
 
       users.${username} = {
         inherit hashedPassword;
 
+        shell = cfg.shell;
+
         isNormalUser = true;
         uid = 1000;
 
-        extraGroups =
-            [
-              "wheel"
-              "networkmanager"
-            ];
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+        ];
       };
     };
 

@@ -2,11 +2,17 @@
 #
 #  WSL system configuration
 #
-#  Majority of configuration should be parametised and handled by the 
+#  Majority of configuration should be parametised and handled by the
 #  system module.
 #
 ###############################################################################
-{ inputs, config, lib, ...}:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (inputs) nixos-wsl;
   inherit (config.myNixOS.features.system) username;
@@ -28,9 +34,8 @@ in
   # set platform for wsl
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-
   # system configuration
-  myNixOS= {
+  myNixOS = {
     bundles = {
       base.enable = true;
       desktop.enable = false;
@@ -41,11 +46,12 @@ in
         username = "ballsten";
         hashedPassword = "$y$j9T$pzQ45Xjuzy6kVT2wLfpK41$a6CozSBdXG.qJeFfn9TZUB0lIFCDi3XMJtxbLFXb3M8";
         hostName = "wsl";
+        shell = pkgs.fish;
       };
       home-manager = {
         userConfig = ./home.nix;
       };
     };
-    
+
   };
 }
