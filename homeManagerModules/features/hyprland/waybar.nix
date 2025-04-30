@@ -1,9 +1,10 @@
 ##
 # Waybar configuration
 ##
-{ catppuccin-theme, ... }:
+{ catppuccin-theme, config, ... }:
 let
   waybarThemeConf = (builtins.toString catppuccin-theme) + "/waybar/mocha.css";
+  cfg = config.myHomeManager.features;
 in
 {
   programs.waybar = {
@@ -109,7 +110,7 @@ in
       @import '${waybarThemeConf}';
 
       * {
-        font-family: FiraCode Nerd Font;
+        font-family: ${cfg.fonts.nerdFont} Nerd Font;
         font-size: 12px;
         min-height: 0;
       }
