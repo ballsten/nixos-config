@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 let
@@ -154,7 +153,6 @@ in
       vim
       git
       # TODO: this should be temporary
-      inputs.ballsvim.packages.x86_64-linux.ballsvim
     ];
   };
 }
