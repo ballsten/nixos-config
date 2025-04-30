@@ -10,13 +10,19 @@
       enable = true;
       userEmail = "andrew@theaker.name";
       userName = "Andrew Theaker";
+      extraConfig = {
+        pull.rebase = false;
+      };
     };
     lazygit = {
       enable = true;
       settings = {
         gui = {
           theme = {
-            activeBorderColor = [ "#a6e3a1" "bold" ];
+            activeBorderColor = [
+              "#a6e3a1"
+              "bold"
+            ];
             inactiveBorderColor = [ "#a6adc8" ];
             optionsTextColor = [ "#89b4fa" ];
             selectedLineBgColor = [ "#313244" ];
