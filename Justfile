@@ -6,6 +6,8 @@
 #
 ############################################################################
 
+default: deploy
+
 deploy:
   sudo nixos-rebuild switch --flake .
 
@@ -16,9 +18,10 @@ up:
   nix flake update
 
 # Update specific input
-# usage: make upp i=home-manager
-upp:
-  nix flake update $(i)
+# usage: just upp home-manager
+[positional-arguments]
+@upp input:
+  nix flake update $1
 
 history:
   nix profile history --profile /nix/var/nix/profiles/system
