@@ -16,5 +16,9 @@
       base.enable = true;
       desktop.enable = true;
     };
+    features = {
+      fonts.nerdFont = "Terminess";
+      fonts.nerdFontSize = "14";
+    };
   };
 }
