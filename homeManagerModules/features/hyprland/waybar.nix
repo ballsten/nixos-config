@@ -110,8 +110,8 @@ in
       @import '${waybarThemeConf}';
 
       * {
-        font-family: ${cfg.fonts.nerdFont} Nerd Font;
-        font-size: 12px;
+        font-family: FiraCode Nerd Font;
+        font-size: 14px;
         min-height: 0;
       }
 
