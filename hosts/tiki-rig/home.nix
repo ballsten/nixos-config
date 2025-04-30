@@ -1,11 +1,5 @@
+{ ... }:
 {
-  inputs,
-  outputs,
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
   imports = [
     # outputs.homeManagerModules.default
   ];
@@ -22,7 +16,5 @@
       base.enable = true;
       desktop.enable = true;
     };
-    # TODO: remove
-    #features.wezterm.enable = false;
   };
 }

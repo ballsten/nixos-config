@@ -34,9 +34,6 @@ in
   # set platform for wsl
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  # TODO: this is temporary
-  programs.fish.enable = true;
-
   # system configuration
   myNixOS = {
     bundles = {

@@ -1,9 +1,18 @@
-{ lib, ... }:
+{
+  lib,
+  osConfig,
+  pkgs,
+  ...
+}:
 let
-  inherit (lib) mkDefault;
+  cfg = osConfig.myNixOS.features.system;
 in
 {
-  myHomeManager.features.bash.enable = mkDefault true;
-  myHomeManager.features.git.enable = mkDefault true;
-  myHomeManager.features.just.enable = mkDefault true;
+  ##
+  # Enable the correct shell
+  ##
+  myHomeManager.features.bash.enable = lib.mkDefault (if cfg.shell == pkgs.bash then true else false);
+  myHomeManager.features.fish.enable = lib.mkDefault (if cfg.shell == pkgs.fish then true else false);
+  myHomeManager.features.git.enable = lib.mkDefault true;
+  myHomeManager.features.just.enable = lib.mkDefault true;
 }

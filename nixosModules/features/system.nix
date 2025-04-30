@@ -54,13 +54,18 @@ in
     };
 
     shell = lib.mkOption {
-      type = lib.types.package;
+      type = lib.types.enum (
+        with pkgs;
+        [
+          bash
+          fish
+        ]
+      );
       default = pkgs.bash;
       description = ''
         Set the shell for this user
       '';
     };
-
   };
 
   config = {
@@ -109,6 +114,12 @@ in
 
     system = {
       inherit (cfg) stateVersion;
+    };
+
+    # enable the correct shell
+    # bash is always enabled
+    programs = {
+      fish.enable = lib.mkIf (cfg.shell == pkgs.fish) true;
     };
 
     users = {
