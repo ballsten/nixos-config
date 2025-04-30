@@ -5,9 +5,11 @@
   outputs,
   helperLib,
   ...
-}: let
+}:
+let
   cfg = config.myNixOS;
-in {
+in
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -26,6 +28,7 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      backupFileExtension = "backup";
 
       extraSpecialArgs = {
         inherit inputs;
@@ -33,16 +36,18 @@ in {
         outputs = inputs.self.outputs;
       };
       users = {
-        ${cfg.features.system.username} = {...}: {
-          imports = [
-            (import cfg.features.home-manager.userConfig)
-            outputs.homeManagerModules.default
-          ];
+        ${cfg.features.system.username} =
+          { ... }:
+          {
+            imports = [
+              (import cfg.features.home-manager.userConfig)
+              outputs.homeManagerModules.default
+            ];
 
-          home = {
-            inherit (cfg.features.system) stateVersion;
+            home = {
+              inherit (cfg.features.system) stateVersion;
+            };
           };
-        };
       };
     };
   };
