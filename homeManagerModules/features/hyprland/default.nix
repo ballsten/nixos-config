@@ -31,6 +31,7 @@ in
 
   home.packages = with pkgs; [
     hyprpicker
+    wl-clipboard
     catppuccin-theme
     catppuccin-cursors.mochaGreen
   ];
