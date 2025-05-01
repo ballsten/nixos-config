@@ -17,4 +17,5 @@ in
   myHomeManager.features.git.enable = lib.mkDefault true;
   myHomeManager.features.just.enable = lib.mkDefault true;
   myHomeManager.features.ballsvim.enable = lib.mkDefault true;
+  myHomeManager.features.direnv.enable = lib.mkDefault true;
 }
