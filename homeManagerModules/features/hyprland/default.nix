@@ -34,6 +34,8 @@ in
     wl-clipboard
     catppuccin-theme
     catppuccin-cursors.mochaGreen
+    networkmanagerapplet
+    hicolor-icon-theme
   ];
 
   ##
@@ -46,6 +48,7 @@ in
   ##
   # Applets
   ##
+  # TODO: trying stuff
   services.network-manager-applet.enable = true;
 
   ##
