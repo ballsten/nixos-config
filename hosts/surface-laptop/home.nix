@@ -1,9 +1,7 @@
+##
+# Home configuration for surface laptop
+##
 {
-  inputs,
-  outputs,
-  pkgs,
-  lib,
-  config,
   ...
 }:
 {
@@ -13,5 +11,6 @@
       base.enable = true;
       desktop.enable = true;
     };
+    features.hyprland.suspendEnable = true;
   };
 }

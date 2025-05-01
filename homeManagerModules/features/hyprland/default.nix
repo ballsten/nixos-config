@@ -17,14 +17,19 @@ in
         default = "wezterm";
         description = "the default terminal program for hyprland";
       };
+      suspendEnable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable the use of suspend in hypridle configuration";
+      };
     };
   };
 
   imports = [
     (import ./waybar.nix { inherit pkgs catppuccin-theme config; })
     (import ./hyprlock.nix { inherit pkgs catppuccin-theme config; })
+    (import ./hypridle.nix { inherit config; })
     ./wofi.nix
-    ./hypridle.nix
     ./hyprpaper.nix
     ./hyprsunset.nix
   ];
