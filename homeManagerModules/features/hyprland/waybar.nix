@@ -1,12 +1,21 @@
 ##
 # Waybar configuration
 ##
-{ catppuccin-theme, config, ... }:
+{
+  catppuccin-theme,
+  config,
+  pkgs,
+  ...
+}:
 let
   waybarThemeConf = (builtins.toString catppuccin-theme) + "/waybar/mocha.css";
   cfg = config.myHomeManager.features;
 in
 {
+  #install volume control
+  home.packages = with pkgs; [
+    pavucontrol
+  ];
   programs.waybar = {
     enable = true;
     settings = {
@@ -92,7 +101,7 @@ in
               " "
             ];
           };
-          #on-click = "pavucontrol";
+          on-click = "pavucontrol";
         };
         "custom/lock" = {
           tooltip = false;

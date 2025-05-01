@@ -21,7 +21,7 @@ in
   };
 
   imports = [
-    (import ./waybar.nix { inherit catppuccin-theme config; })
+    (import ./waybar.nix { inherit pkgs catppuccin-theme config; })
     (import ./hyprlock.nix { inherit pkgs catppuccin-theme config; })
     ./wofi.nix
     ./hypridle.nix
