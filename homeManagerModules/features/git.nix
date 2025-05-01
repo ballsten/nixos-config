@@ -9,7 +9,7 @@
     git = {
       enable = true;
       userEmail = "andrew@theaker.name";
-      userName = "Andrew Theaker";
+      userName = "ballsten";
       extraConfig = {
         pull.rebase = false;
       };
