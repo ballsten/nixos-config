@@ -44,21 +44,6 @@ in
       };
 
       label = [
-        # LAYOUT
-        # {
-        #   # monitor =
-        #   text = "Layout: $LAYOUT";
-        #   color = "$text";
-        #   font_size = 25;
-        #   font_family = "$font";
-        #   position = [
-        #     30
-        #     (0 - 30)
-        #   ];
-        #   halign = "left";
-        #   valign = "top";
-        # }
-
         # TIME
         {
           # monitor =
