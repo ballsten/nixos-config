@@ -77,7 +77,6 @@ in
           configurationLimit = 10;
         };
 
-        timeout = 5;
         efi.canTouchEfiVariables = true;
       };
 
