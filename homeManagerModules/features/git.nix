@@ -12,6 +12,7 @@
       userName = "ballsten";
       extraConfig = {
         pull.rebase = false;
+        remote.origin.prune = true;
       };
     };
     lazygit = {
