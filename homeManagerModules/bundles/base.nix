@@ -18,4 +18,5 @@ in
   myHomeManager.features.just.enable = lib.mkDefault true;
   myHomeManager.features.ballsvim.enable = lib.mkDefault true;
   myHomeManager.features.direnv.enable = lib.mkDefault true;
+  myHomeManager.features.awscli.enable = lib.mkDefault true;
 }
