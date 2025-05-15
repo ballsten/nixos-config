@@ -3,11 +3,9 @@
 ##
 {
   pkgs,
-  config,
   ...
 }:
 let
-  cfg = config.myHomeManager.features.hyprland;
   loginpaper = pkgs.fetchurl {
     url = "http://files.theaker.name/wallpaper/spaceship-cliff-face.jpg";
     hash = "sha256-cfe76pEQ/6FL9tX4qK0hD7vPfxJPseXOe4y7g/eEKtM=";
@@ -16,25 +14,19 @@ let
     url = "http://files.theaker.name/images/ballsten-avatar-240x240.jpg";
     hash = "sha256-weOqsOTX+vKzZ5bK3M7TexKPOiELlHX0D1t/MoF9mYM=";
   };
-  catppuccin-theme = (
-    pkgs.catppuccin.override {
-      variant = cfg.catppuccin-variant;
-      accent = cfg.catppuccin-accent;
-    }
-  );
-  hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
 in
 {
   home.packages = [
     pkgs.nerd-fonts.fira-code
   ];
+  # enable theme
+  catppuccin.hyprlock = {
+    enable = true;
+    useDefaultConfig = false;
+  };
   programs.hyprlock = {
     enable = true;
     settings = {
-      source = hyprlandThemeConf;
-
-      "$accent" = "$green";
-      "$accentAlpha" = "$greenAlpha";
       "$font" = "FiraCode Nerd Font";
 
       # GENERAL

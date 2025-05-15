@@ -22,7 +22,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixos-wsl = {
@@ -30,23 +30,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin.url = "github:catppuccin/nix";
+
     ballsvim = {
       url = "github:ballsten/nvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: let
-    helperLib = import ./helperLib {inherit inputs;};
-  in
-  with helperLib; {
-    nixosConfigurations = {
-      surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
-      wsl = mkSystem ./hosts/wsl/configuration.nix;
-      tiki-rig = mkSystem ./hosts/tiki-rig/configuration.nix;
+  outputs =
+    { nixpkgs, ... }@inputs:
+    let
+      helperLib = import ./helperLib { inherit inputs; };
+    in
+    with helperLib;
+    {
+      nixosConfigurations = {
+        surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
+        wsl = mkSystem ./hosts/wsl/configuration.nix;
+        tiki-rig = mkSystem ./hosts/tiki-rig/configuration.nix;
+      };
+
+      homeManagerModules.default = ./homeManagerModules;
+      nixosModules.default = ./nixosModules;
     };
-    
-    homeManagerModules.default = ./homeManagerModules;
-    nixosModules.default = ./nixosModules;
-  };
 }

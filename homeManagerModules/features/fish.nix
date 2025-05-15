@@ -2,20 +2,10 @@
 # Fish shell configuration
 ##
 {
-  pkgs,
   ...
 }:
-let
-  catppuccin-fish = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "fish";
-    rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
-    hash = "sha256-Oc0emnIUI4LV7QJLs4B2/FQtCFewRFVp7EDv8GawFsA=";
-  };
-in
 {
-  xdg.configFile."fish/themes/Catppuccin Mocha.theme".source =
-    "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
+  catppuccin.fish.enable = true;
   programs.fish = {
     enable = true;
     generateCompletions = true;

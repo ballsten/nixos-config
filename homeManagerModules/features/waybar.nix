@@ -3,24 +3,16 @@
 ##
 {
   pkgs,
-  config,
   ...
 }:
-let
-  cfg = config.myHomeManager.features.hyprland;
-  catppuccin-theme = (
-    pkgs.catppuccin.override {
-      variant = cfg.catppuccin-variant;
-      accent = cfg.catppuccin-accent;
-    }
-  );
-  waybarThemeConf = (builtins.toString catppuccin-theme) + "/waybar/mocha.css";
-in
 {
   #install volume control
   home.packages = with pkgs; [
     pavucontrol
   ];
+  # enable theme
+  catppuccin.waybar.enable = true;
+
   programs.waybar = {
     enable = true;
     settings = {
@@ -121,8 +113,6 @@ in
       };
     };
     style = ''
-      @import '${waybarThemeConf}';
-
       * {
         font-family: FiraCode Nerd Font;
         font-size: 14px;

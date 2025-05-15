@@ -42,6 +42,7 @@ in
             imports = [
               (import cfg.features.home-manager.userConfig)
               outputs.homeManagerModules.default
+              inputs.catppuccin.homeModules.catppuccin
             ];
 
             home = {

@@ -6,13 +6,6 @@
 }:
 let
   cfg = config.myHomeManager.features.hyprland;
-  catppuccin-theme = (
-    pkgs.catppuccin.override {
-      variant = cfg.catppuccin-variant;
-      accent = cfg.catppuccin-accent;
-    }
-  );
-  hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
 in
 {
   options = {
@@ -43,8 +36,6 @@ in
   home.packages = with pkgs; [
     hyprpicker
     wl-clipboard
-    catppuccin-theme
-    catppuccin-cursors.mochaGreen
     networkmanagerapplet
     hicolor-icon-theme
   ];
@@ -62,6 +53,9 @@ in
   # TODO: trying stuff
   services.network-manager-applet.enable = true;
 
+  # enable theme
+  catppuccin.hyprland.enable = true;
+
   ##
   # Wayland configuration
   ##
@@ -69,8 +63,6 @@ in
     enable = true;
 
     settings = {
-      source = hyprlandThemeConf;
-
       ################
       ### MONITORS ###
       ################
@@ -88,7 +80,7 @@ in
       "$terminal" = cfg.terminal;
       "$browser" = "firefox";
       "$lockscreen" = "hyprlock";
-      "$menu" = "wofi";
+      "$menu" = "rofi -show drun";
 
       # TODO: probably use these at some point
       # $fileManager = dolphin
@@ -114,11 +106,6 @@ in
       #############################
 
       # See https://wiki.hyprland.org/Configuring/Environment-variables/
-
-      env = [
-        "HYPRCURSOR_THEME,catppuccin-mocha-green-cursors"
-        "HYPRCURSOR_SIZE,24"
-      ];
 
       #####################
       ### LOOK AND FEEL ###
