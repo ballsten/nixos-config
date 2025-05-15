@@ -5,9 +5,14 @@
   ...
 }:
 let
-  catppuccin-theme = import ./catppuccin-theme.nix { inherit pkgs; };
-  hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
   cfg = config.myHomeManager.features.hyprland;
+  catppuccin-theme = (
+    pkgs.catppuccin.override {
+      variant = cfg.catppuccin-variant;
+      accent = cfg.catppuccin-accent;
+    }
+  );
+  hyprlandThemeConf = (builtins.toString catppuccin-theme) + "/hyprland/mocha.conf";
 in
 {
   options = {
@@ -22,17 +27,18 @@ in
         default = false;
         description = "Enable the use of suspend in hypridle configuration";
       };
+      catppuccin-variant = lib.mkOption {
+        type = lib.types.str;
+        default = "mocha";
+        description = "catppuccin theme variant";
+      };
+      catppuccin-accent = lib.mkOption {
+        type = lib.types.str;
+        default = "green";
+        description = "catppuccin theme accent";
+      };
     };
   };
-
-  imports = [
-    (import ./waybar.nix { inherit pkgs catppuccin-theme config; })
-    (import ./hyprlock.nix { inherit pkgs catppuccin-theme config; })
-    (import ./hypridle.nix { inherit config; })
-    ./wofi.nix
-    ./hyprpaper.nix
-    ./hyprsunset.nix
-  ];
 
   home.packages = with pkgs; [
     hyprpicker

@@ -2,14 +2,19 @@
 # Waybar configuration
 ##
 {
-  catppuccin-theme,
-  config,
   pkgs,
+  config,
   ...
 }:
 let
+  cfg = config.myHomeManager.features.hyprland;
+  catppuccin-theme = (
+    pkgs.catppuccin.override {
+      variant = cfg.catppuccin-variant;
+      accent = cfg.catppuccin-accent;
+    }
+  );
   waybarThemeConf = (builtins.toString catppuccin-theme) + "/waybar/mocha.css";
-  cfg = config.myHomeManager.features;
 in
 {
   #install volume control
