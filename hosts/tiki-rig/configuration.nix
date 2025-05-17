@@ -19,6 +19,7 @@
       "nvidia-settings"
       "nvidia-x11"
       "obsidian"
+      "discord"
     ];
 
   # enable nvidia
