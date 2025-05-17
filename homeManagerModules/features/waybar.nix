@@ -736,18 +736,23 @@
 
       #custom-right4 {
         color: @date;
-        background: @tray;
+        background: @disk;
       }
 
       /* ─────────────────────────────────────────────────────────────────┤ disk ├───
       */
       #disk {
-        background: @tray;
+        background: @disk;
         padding: 0 8px 0 5px;
       }
 
       #disk:hover {
         color: @hover-fg;
+      }
+
+      #custom-right5 {
+        color: @disk;
+        background: @main-bg;
       }
 
       /* ───────────────────────────────────────────────────────────┤ media info ├───
