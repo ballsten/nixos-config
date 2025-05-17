@@ -54,7 +54,10 @@ in
   services.network-manager-applet.enable = true;
 
   # enable theme
-  catppuccin.hyprland.enable = true;
+  catppuccin = {
+    hyprland.enable = true;
+    cursors.enable = true;
+  };
 
   ##
   # Wayland configuration
