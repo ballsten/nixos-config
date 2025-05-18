@@ -340,7 +340,7 @@
           "format" = " ";
           "tooltip" = false;
           # "tooltip-format"= "Power Menu";
-          "on-click" = "wlogout &";
+          "on-click" = "hyprctl dispatch exit &";
         };
 
         # ────────────────────────────────────────────────────────────┤ padding ├───
