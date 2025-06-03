@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748159664,
-        "narHash": "sha256-VExDUckGeVEr453b+sPjA0ETF2Z41iON/rwOltjvuDI=",
+        "lastModified": 1748933800,
+        "narHash": "sha256-I7wXMi8BsR/r3Lv3em0DmjmdtPY2O/DLwoDHXfw4SKI=",
         "owner": "ballsten",
         "repo": "nvim-nix",
-        "rev": "7d51ee12d73c19f1d315962daf6b570c3eaff70f",
+        "rev": "e41bd19789e8b019f76086d8fe5767ab75cc0e60",
         "type": "github"
       },
       "original": {
