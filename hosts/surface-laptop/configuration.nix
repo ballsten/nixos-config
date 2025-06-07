@@ -22,6 +22,7 @@ in
     pkg:
     builtins.elem (pkgs.lib.getName pkg) [
       "obsidian"
+      "discord"
     ];
 
   # enable bluetooth
