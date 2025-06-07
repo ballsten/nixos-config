@@ -20,6 +20,10 @@
       "nvidia-x11"
       "obsidian"
       "discord"
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
     ];
 
   # enable nvidia
@@ -47,6 +51,7 @@
     bundles = {
       base.enable = true;
       desktop.enable = true;
+      gaming.enable = true;
     };
 
     features = {
