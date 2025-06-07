@@ -39,3 +39,6 @@ clean:
 gc:
   # garbage collect all unused nix store entries
   sudo nix-collect-garbage --delete-old
+
+check:
+  nix flake check .
