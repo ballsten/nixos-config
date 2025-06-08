@@ -1,0 +1,8 @@
+##
+# Element matrix client
+#
+{ pkgs, ...}: {
+  home.packages = with pkgs; [
+    element-desktop
+  ];
+}
