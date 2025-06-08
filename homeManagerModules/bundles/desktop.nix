@@ -8,4 +8,5 @@ in
   myHomeManager.features.obsidian.enable = mkDefault true;
   myHomeManager.features.gimp.enable = mkDefault true;
   myHomeManager.features.discord.enable = mkDefault true;
+  myHomeManager.features.element.enable = mkDefault true;
 }
