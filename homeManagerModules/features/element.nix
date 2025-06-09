@@ -1,8 +1,8 @@
 ##
 # Element matrix client
 #
-{ pkgs, ...}: {
-  home.packages = with pkgs; [
-    element-desktop
-  ];
+{ ... }: {
+  programs.element-desktop = {
+    enable = true;
+  };
 }
