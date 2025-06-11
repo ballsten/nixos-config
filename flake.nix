@@ -35,10 +35,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ballsvim = {
-      url = "github:ballsten/nvim-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ballsvim.url = "github:ballsten/BallsVim";
   };
 
   outputs =
