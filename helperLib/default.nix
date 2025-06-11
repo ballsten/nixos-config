@@ -26,6 +26,7 @@ rec {
         config
         outputs.nixosModules.default
         inputs.catppuccin.nixosModules.catppuccin
+        (import ../overlays { inherit inputs; })
       ];
     };
 
