@@ -42,6 +42,7 @@
     { nixpkgs, ... }@inputs:
     let
       helperLib = import ./helperLib { inherit inputs; };
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in
     with helperLib;
     {
@@ -53,5 +54,12 @@
 
       homeManagerModules.default = ./homeManagerModules;
       nixosModules.default = ./nixosModules;
+
+      devShells.x86_64-linux.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          nixd
+          nixfmt-rfc-style
+        ];
+      };
     };
 }
