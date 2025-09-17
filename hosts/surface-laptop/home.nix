@@ -12,5 +12,7 @@
       desktop.enable = true;
     };
     features.hyprland.suspendEnable = true;
+    features.waybar.enable = false;
+    features.waybar-slashes.enable = true;
   };
 }
