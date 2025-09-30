@@ -19,6 +19,8 @@
     features = {
       fonts.nerdFont = "Terminess";
       fonts.nerdFontSize = "14";
+      waybar.enable = false;
+      waybar-slashes.enable = true;
     };
   };
 }
