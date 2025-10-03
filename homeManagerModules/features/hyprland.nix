@@ -269,6 +269,7 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
         "$mainMod, J, togglesplit," # dwindle
+        "$mainMod SHIFT, F, fullscreen" # fullscreen
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
