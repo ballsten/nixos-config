@@ -8,9 +8,11 @@
   programs = {
     git = {
       enable = true;
-      userEmail = "andrew@theaker.name";
-      userName = "ballsten";
-      extraConfig = {
+      settings = {
+        user = {
+          email = "andrew@theaker.name";
+          name = "ballsten";
+        };
         pull.rebase = false;
         remote.origin.prune = true;
       };
