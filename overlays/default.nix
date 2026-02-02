@@ -2,6 +2,5 @@
 { inputs, ... }:
 {
   nixpkgs.overlays = [
-    inputs.ballsvim.overlays.default
   ];
 }

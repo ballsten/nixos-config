@@ -3,11 +3,11 @@
 # expect inputs to be provided by the flake
 ##
 {
-  pkgs,
+  inputs,
   ...
 }:
 {
   home.packages = [
-    pkgs.ballsvim
+    inputs.ballsvim.packages.x86_64-linux.default
   ];
 }
