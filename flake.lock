@@ -7,11 +7,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1769802395,
-        "narHash": "sha256-UNhqr0PaF1ib7/1f+kyTWmuV8F0qs/4owVJmyKZgRYo=",
+        "lastModified": 1769804526,
+        "narHash": "sha256-Pxlehou/bXek5nAsTO8n/gTJRcoANyn+4E/hWNECM6M=",
         "owner": "ballsten",
         "repo": "BallsVim",
-        "rev": "2ff532850ebb4ff0c83ab5f059a95d1fe6980ae3",
+        "rev": "8ac0426df49e992187bddf8f5c114b468df5e30b",
         "type": "github"
       },
       "original": {
