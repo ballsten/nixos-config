@@ -11,4 +11,5 @@ in
   myHomeManager.features.waybar.enable = mkDefault true;
   myHomeManager.features.rofi.enable = mkDefault true;
   myHomeManager.features.catppuccin.enable = mkDefault true;
+  myHomeManager.features.gtk.enable = mkDefault true;
 }
