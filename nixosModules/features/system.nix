@@ -143,6 +143,9 @@ in
 
       networkmanager = {
         enable = true;
+        plugins = with pkgs; [
+          networkmanager-openvpn
+        ];
       };
     };
 
