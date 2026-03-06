@@ -9,4 +9,5 @@ in
   myHomeManager.features.gimp.enable = mkDefault true;
   myHomeManager.features.discord.enable = mkDefault true;
   myHomeManager.features.element.enable = mkDefault true;
+  myHomeManager.features.accounting.enable = mkDefault true;
 }
