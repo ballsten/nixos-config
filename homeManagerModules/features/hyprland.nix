@@ -45,7 +45,10 @@ in
   ##
 
   # TODO: modularize these (terminal already done) but enable programs
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
+  };
 
   ##
   # Applets
@@ -64,6 +67,9 @@ in
   ##
   wayland.windowManager.hyprland = {
     enable = true;
+
+    # TODO: change this to lua
+    configType = "hyprlang";
 
     settings = {
       ################
