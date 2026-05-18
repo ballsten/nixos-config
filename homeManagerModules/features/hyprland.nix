@@ -213,7 +213,6 @@ in
 
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
-        pseudotile = true; # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true; # You probably want this
       };
 
@@ -274,7 +273,7 @@ in
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," # dwindle
-        "$mainMod, J, togglesplit," # dwindle
+        "$mainMod, J, layoutmsg, togglesplit," # dwindle
         "$mainMod SHIFT, F, fullscreen" # fullscreen
 
         # Move focus with mainMod + arrow keys
@@ -353,13 +352,13 @@ in
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
-      windowrulev2 = [
-        # Ignore maximize requests from apps. You'll probably like this.
-        "suppressevent maximize, class:.*"
+      #windowrule = [
+      # Ignore maximize requests from apps. You'll probably like this.
+      # "suppressevent maximize, class:.*"
 
-        # Fix some dragging issues with XWayland
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      ];
+      # Fix some dragging issues with XWayland
+      #  "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      #];
     };
 
   };
