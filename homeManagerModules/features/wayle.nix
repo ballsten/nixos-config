@@ -18,6 +18,7 @@
               "notifications"
               "systray"
               "hyprland-workspaces"
+              "window-title"
             ];
             monitor = "*";
             right = [
@@ -34,12 +35,15 @@
       modules = {
         clock = {
           dropdown-show-seconds = false;
-          format = "%H:%M:%S";
+          format = "%H:%M";
         };
         volume = {
           border-color = "blue";
           icon-bg-color = "blue";
           label-color = "blue";
+        };
+        weather = {
+          location = "Newcastle";
         };
       };
       general = with config.stylix.fonts; {
