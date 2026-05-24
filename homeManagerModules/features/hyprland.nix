@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.myHomeManager.features.hyprland;
+  cursors = pkgs.rose-pine-hyprcursor;
 in
 {
   options = {
@@ -20,16 +21,6 @@ in
         default = false;
         description = "Enable the use of suspend in hypridle configuration";
       };
-      catppuccin-variant = lib.mkOption {
-        type = lib.types.str;
-        default = "mocha";
-        description = "catppuccin theme variant";
-      };
-      catppuccin-accent = lib.mkOption {
-        type = lib.types.str;
-        default = "green";
-        description = "catppuccin theme accent";
-      };
     };
   };
 
@@ -38,6 +29,7 @@ in
     wl-clipboard
     networkmanagerapplet
     hicolor-icon-theme
+    cursors
   ];
 
   ##
@@ -49,6 +41,10 @@ in
     enable = true;
     configPath = "${config.xdg.configHome}/mozilla/firefox";
   };
+  stylix.targets.firefox = {
+    profileNames = [ "default" ];
+    fonts.enable = false;
+  };
 
   ##
   # Applets
@@ -56,10 +52,13 @@ in
   # TODO: trying stuff
   services.network-manager-applet.enable = true;
 
-  # enable theme
-  catppuccin = {
-    hyprland.enable = true;
-    cursors.enable = true;
+  ##
+  # Cursor configuration
+  ##
+  home.pointerCursor = {
+    name = cursors.name;
+    package = cursors;
+    hyprcursor.enable = true;
   };
 
   ##
@@ -102,13 +101,9 @@ in
       # Or execute your favorite apps at launch like this:
 
       exec-once = [
-        "hyprpaper"
-        "waybar"
         "[workspace 1 silent] $terminal"
         "[workspace 2 silent] $browser"
       ];
-      # exec-once = nm-applet &
-      # exec-once = waybar & hyprpaper & firefox
 
       #############################
       ### ENVIRONMENT VARIABLES ###
@@ -130,8 +125,9 @@ in
         border_size = 2;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "$green $sapphire 45deg";
-        "col.inactive_border" = "$overlay0";
+        # NOTE: removed for stylix
+        # "col.active_border" = "$green $sapphire 45deg";
+        # "col.inactive_border" = "$overlay0";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false;
@@ -154,7 +150,8 @@ in
           enabled = true;
           range = 4;
           render_power = 3;
-          color = "rgba(1a1a1aee)";
+          # NOTE: removed due to stylix
+          # color = "rgba(1a1a1aee)";
         };
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur

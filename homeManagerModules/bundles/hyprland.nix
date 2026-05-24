@@ -8,8 +8,7 @@ in
   myHomeManager.features.hyprsunset.enable = mkDefault true;
   myHomeManager.features.hyprlock.enable = mkDefault true;
   myHomeManager.features.hyprpaper.enable = mkDefault true;
-  myHomeManager.features.waybar.enable = mkDefault true;
+  myHomeManager.features.wayle.enable = mkDefault true;
   myHomeManager.features.rofi.enable = mkDefault true;
-  myHomeManager.features.catppuccin.enable = mkDefault true;
   myHomeManager.features.gtk.enable = mkDefault true;
 }

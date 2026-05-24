@@ -16,11 +16,5 @@
       base.enable = true;
       desktop.enable = true;
     };
-    features = {
-      fonts.nerdFont = "Terminess";
-      fonts.nerdFontSize = "14";
-      waybar.enable = false;
-      waybar-slashes.enable = true;
-    };
   };
 }

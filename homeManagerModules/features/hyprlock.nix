@@ -6,28 +6,15 @@
   ...
 }:
 let
-  loginpaper = pkgs.fetchurl {
-    url = "http://files.theaker.name/wallpaper/spaceship-cliff-face.jpg";
-    hash = "sha256-cfe76pEQ/6FL9tX4qK0hD7vPfxJPseXOe4y7g/eEKtM=";
-  };
   avatar = pkgs.fetchurl {
     url = "http://files.theaker.name/images/ballsten-avatar-240x240.jpg";
     hash = "sha256-weOqsOTX+vKzZ5bK3M7TexKPOiELlHX0D1t/MoF9mYM=";
   };
 in
 {
-  home.packages = [
-    pkgs.nerd-fonts.fira-code
-  ];
-  # enable theme
-  catppuccin.hyprlock = {
-    enable = true;
-    useDefaultConfig = false;
-  };
   programs.hyprlock = {
     enable = true;
     settings = {
-      "$font" = "FiraCode Nerd Font";
 
       # GENERAL
       general = {
@@ -37,9 +24,7 @@ in
       # BACKGROUND
       background = {
         # monitor = nil;
-        path = builtins.toString loginpaper;
         blur_passes = 0;
-        color = "$base";
       };
 
       label = [
@@ -47,9 +32,7 @@ in
         {
           # monitor =
           text = "$TIME";
-          color = "$text";
           font_size = 90;
-          font_family = "$font";
           position = "-30, 0";
           halign = "right";
           valign = "top";
@@ -59,9 +42,7 @@ in
         {
           # monitor =
           text = "cmd[update:43200000] date +\"%A, %d %B %Y\"";
-          color = "$text";
           font_size = 25;
-          font_family = "$font";
           position = "-30, -150";
           halign = "right";
           valign = "top";
@@ -73,7 +54,7 @@ in
         # monitor =
         path = builtins.toString avatar;
         size = 100;
-        border_color = "$accent";
+        # border_color = "$accent";
         position = "0, -19%";
         halign = "center";
         valign = "center";
@@ -87,16 +68,11 @@ in
         dots_size = 0.2;
         dots_spacing = 0.2;
         dots_center = true;
-        outer_color = "$accent";
-        inner_color = "$surface0";
-        font_color = "$text";
         fade_on_empty = false;
-        placeholder_text = "<span foreground=\"##$textAlpha\"><i>󰌾 Logged in as </i><span foreground=\"##$accentAlpha\">$USER</span></span>";
+        placeholder_text = "<i>󰌾 Logged in as </i>$USER";
         hide_input = false;
-        check_color = "$accent";
-        fail_color = "$red";
         fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-        capslock_color = "$yellow";
+        # capslock_color = "$yellow";
         position = "0, -25%";
         halign = "center";
         valign = "center";

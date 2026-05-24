@@ -4,5 +4,6 @@
     hyprland.enable = true;
     greetd.enable = true;
     audio.enable = true;
+    stylix.enable = true;
   };
 }

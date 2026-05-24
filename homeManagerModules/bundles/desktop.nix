@@ -4,6 +4,7 @@ let
 in
 {
   myHomeManager.bundles.hyprland.enable = mkDefault true;
+  myHomeManager.features.stylix.enable = mkDefault true;
   myHomeManager.features.wezterm.enable = mkDefault true;
   myHomeManager.features.obsidian.enable = mkDefault true;
   myHomeManager.features.gimp.enable = mkDefault true;

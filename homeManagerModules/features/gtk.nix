@@ -1,7 +1,10 @@
 # enable gtk theme
-{ ... }: {
+{ ... }:
+{
   gtk = {
-  enable = true;
-  colorScheme = "dark";
+    enable = true;
+    # NOTE: remove due to stylix
+    # colorScheme = "dark";
+    gtk4.theme = null;
   };
 }

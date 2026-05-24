@@ -11,6 +11,9 @@ default: deploy
 deploy:
   sudo nixos-rebuild switch --flake .
 
+deploy-with-ifd:
+  sudo nixos-rebuild switch --flake . --option allow-import-from-derivation true
+
 debug:
   sudo nixos-rebuild switch --flake . --show-trace --verbose
 
