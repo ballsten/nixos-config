@@ -13,6 +13,7 @@
         cursorline = true;
         auto-format = true;
         end-of-line-diagnostics = "hint";
+        bufferline = "multiple";
 
         lsp = {
           enable = true;
