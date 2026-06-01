@@ -37,6 +37,9 @@
           dropdown-show-seconds = false;
           format = "%H:%M";
         };
+        hyprland-workspaces = {
+          label-use-name = true;
+        };
         volume = {
           border-color = "blue";
           icon-bg-color = "blue";
