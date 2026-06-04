@@ -8,7 +8,6 @@ in
   myHomeManager.features.wezterm.enable = mkDefault true;
   myHomeManager.features.obsidian.enable = mkDefault true;
   myHomeManager.features.gimp.enable = mkDefault true;
-  myHomeManager.features.discord.enable = mkDefault true;
   myHomeManager.features.element.enable = mkDefault true;
   myHomeManager.features.accounting.enable = mkDefault true;
   myHomeManager.features.zed.enable = mkDefault true;

@@ -6,6 +6,6 @@
 {
   myNixOS.features.system.enable = lib.mkDefault true;
   myNixOS.features.home-manager.enable = lib.mkDefault true;
-  myNixOS.features.plymouth.enable = lib.mkDefault true;
+  myNixOS.features.plymouth.enable = lib.mkDefault false;
   myNixOS.features.wgnord.enable = lib.mkDefault false;
 }
