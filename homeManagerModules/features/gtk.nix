@@ -3,8 +3,9 @@
 {
   gtk = {
     enable = true;
-    # NOTE: remove due to stylix
+    # TODO: remove due to stylix
     # colorScheme = "dark";
-    gtk4.theme = null;
+    # TODO: removing due to error in latest update
+    # gtk4.theme = null;
   };
 }
