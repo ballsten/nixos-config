@@ -13,5 +13,8 @@ in
     enable = true;
     image = ../../resources/images/wallpaper-neon-city.jpg;
     base16Scheme = "${tinted-schemes}/base16/spaceduck.yaml";
+
+    # remove due to error with fonts as part of latest update
+    targets.kmscon.enable = false;
   };
 }
