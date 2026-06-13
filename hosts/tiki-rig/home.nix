@@ -16,6 +16,7 @@
     bundles = {
       base.enable = true;
       desktop.enable = true;
+      gaming.enable = true;
     };
 
     features.hyprland.monitors = /* lua */ ''

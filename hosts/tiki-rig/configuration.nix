@@ -16,6 +16,8 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (pkgs.lib.getName pkg) [
+      # TODO: consider removing this. Not sure if its possible to
+      # move unfree to devshell
       "claude-code"
       "nvidia-settings"
       "nvidia-x11"

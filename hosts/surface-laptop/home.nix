@@ -10,7 +10,7 @@
     bundles = {
       base.enable = true;
       desktop.enable = true;
-      # TODO: making a gaming bundle
+      gaming.enable = false;
     };
     features.hyprland.suspendEnable = true;
     features.hyprland.monitors = /* lua */ ''
@@ -21,6 +21,5 @@
         scale = "2"
       });
     '';
-    features.discord.enable = false;
   };
 }
