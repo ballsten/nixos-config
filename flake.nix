@@ -6,8 +6,7 @@
 #
 #  Currently supported: (see hosts/<system>/configuration.nix)
 #  - surface-laptop
-#  - wsl
-#  - VM (hyperV)
+#  - tiki-rig
 #
 #  Uses home-manager to user configuration (see hosts/<system>/home.nix)
 #
@@ -53,7 +52,7 @@
     {
       nixosConfigurations = {
         surface-laptop = mkSystem ./hosts/surface-laptop/configuration.nix;
-        wsl = mkSystem ./hosts/wsl/configuration.nix;
+        # wsl = mkSystem ./hosts/wsl/configuration.nix;
         tiki-rig = mkSystem ./hosts/tiki-rig/configuration.nix;
       };
 
