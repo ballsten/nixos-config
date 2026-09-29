@@ -185,6 +185,17 @@ in
           move = { "monitor_w - 854 - 20", "monitor_h - 480 - 70" },
           pin = true
         })
+
+        -- float Awakened poe trade
+        hl.window_rule({
+          match = {
+            class = "^(awakened-poe-trade|Awakened-poe-trade)$"
+            },
+          float = true,
+          border_size = 0,
+          no_blur = true,
+          no_shadow = true,
+        })
         
         --
         -- Look and feel
