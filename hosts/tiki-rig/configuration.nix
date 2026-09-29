@@ -23,6 +23,7 @@
       "nvidia-x11"
       "obsidian"
       "discord"
+      "discord-unwrapped"
       "steam"
       "steam-original"
       "steam-unwrapped"
